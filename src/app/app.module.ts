@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatePTParserFormatter } from './NgbDatePTParserFormatter';
@@ -44,7 +45,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
     FontAwesomeModule,
     NgbModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    NgbTooltipModule
   ],
   providers: [
     [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],

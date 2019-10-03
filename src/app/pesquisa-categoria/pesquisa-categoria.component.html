@@ -26,8 +26,8 @@
         <tr *ngFor="let categoria of categorias">
           <td>{{ categoria.nome }}</td>
           <td class="col-acoes">
-            <a href="#" class="btn  btn-primary"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <a href="#" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>
