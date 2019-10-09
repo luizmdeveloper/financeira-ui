@@ -1,0 +1,30 @@
+
+<nav class="navbar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><fa-icon [icon]="faBars"></fa-icon></a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="navbar__menu" [hidden]="!exibindoMenu">
+    <li class="navbar__menu-usuario">Luiz Mário</li>
+    <li class="navbar__menu-item" routerLinkActive="ativo">
+      <a routerLink="/dashboard" (click)="exibindoMenu = !exibindoMenu">Dashboard</a>
+    </li>
+    <li class="navbar__menu-item" routerLinkActive="ativo">
+      <a routerLink="/categorias" (click)="exibindoMenu = !exibindoMenu">Categorias</a>
+    </li>
+    <li class="navbar__menu-item" routerLinkActive="ativo">
+      <a routerLink="/contas" (click)="exibindoMenu = !exibindoMenu">Contas</a>
+    </li>
+    <li class="navbar__menu-item" routerLinkActive="ativo">
+      <a routerLink="/transacoes" (click)="exibindoMenu = !exibindoMenu">Transações</a>
+    </li>
+    <li class="navbar__menu-item" routerLinkActive="ativo">
+      <a href="javascript:;">Sair</a>
+    </li>
+  </ul>
+
+</nav>

@@ -5,7 +5,7 @@
       <form action="#" method="GET">
           <div class="form-group">
             <label class="control-label" for="nome">Nome</label>
-            <input type="text" class="form-control" nome="nome" id="nome" autocomplete="false"/>
+            <input type="text" class="form-control" name="nome" id="nome" autocomplete="off"/>
           </div>
           <input type="submit" class="btn  btn-primary" value="Pesquisar">
       </form>
@@ -24,7 +24,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let categoria of categorias">
-          <td>{{ categoria.nome }}</td>
+          <td >{{ categoria.nome }}</td>
           <td class="col-acoes">
             <a href="#" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
             <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir"><fa-icon [icon]="faTrash"></fa-icon></button>
@@ -34,7 +34,7 @@
     </table>
   </div>
   <div class="col-12">
-      <a href="#" class="btn  btn-primary"><fa-icon [icon]="faPlus"></fa-icon> Nova</a>
+      <a routerLink="/categorias/nova" class="btn  btn-primary"><fa-icon [icon]="faPlus"></fa-icon> Nova</a>
   </div>
 </div>
 
