@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -16,6 +17,7 @@ import { CategoriaModule } from '../categoria/categoria.module';
 import { TransacaoModule } from '../transacao/transacao.module';
 import { ContaModule } from '../conta/conta.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
+import { SegurancaModule } from './../seguranca/seguranca.module';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
@@ -45,7 +47,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     DashboardModule,
     CategoriaModule,
     TransacaoModule,
-    ContaModule
+    ContaModule,
+    SegurancaModule
   ],
   exports: [
     NavBarComponent
