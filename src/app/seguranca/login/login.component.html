@@ -4,10 +4,10 @@
       <img src="../../../assets/images/logo-info.png" class="image__login-header" id="icon" alt="logo inforio sistemas" />
     </div>
 
-    <form>
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
+    <form #f="ngForm" autocomplete="off">
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" ngModel #email required>
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" NgModel #senha required>
+      <input type="submit" class="fadeIn fourth" value="login" [disabled]="!f.valid" (click)="login(email, senha)">
     </form>
 
   </div>

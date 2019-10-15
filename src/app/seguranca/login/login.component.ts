@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { OauthService } from './../oauth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private oauthService: OauthService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  login(email: string, senha: string){
+    this.oauthService.login(email, senha);
   }
-
 }
