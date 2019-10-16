@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { CategoriaService } from './../categoria.service';
 
 @Component({
   selector: 'app-pesquisa-categoria',
@@ -9,21 +10,22 @@ import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class PesquisaCategoriaComponent implements OnInit {
 
-  categorias = [
-    { codigo: 1, nome: 'Salário' },
-    { codigo: 2, nome: 'Prolabore' },
-    { codigo: 3, nome: 'Investimento' },
-    { codigo: 4, nome: 'Lazer' },
-    { codigo: 5, nome: 'Educação' }
-  ];
+  nome: string;
+  categorias = [];
 
   faTrash = faTrash;
   faPen = faPen;
   faPlus = faPlus;
 
-  constructor() { }
+  constructor(private categoriaService: CategoriaService) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  pesquisar(){
+    this.categoriaService.filtrar({nome: this.nome}).then(
+      response => {
+        console.log(response);
+      });
   }
 
 }
