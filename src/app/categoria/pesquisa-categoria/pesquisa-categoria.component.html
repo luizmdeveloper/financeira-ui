@@ -1,11 +1,11 @@
-<div class="m-2">
+<div class="mb-6">
   <div class="row">
     <div class="col-12">
       <h2>Pesquisa de categoria</h2>
       <form autocomplete="off"  (ngSubmit)="pesquisar()">
           <div class="form-group">
             <label class="control-label" for="nome">Nome</label>
-            <input type="text" class="form-control" name="nome" id="nome" [(ngModel)]="nome"/>
+            <input type="text" class="form-control" name="nome" id="nome" [(ngModel)]="filtro.nome"/>
           </div>
           <input type="submit" class="btn  btn-primary" value="Pesquisar">
       </form>
@@ -13,8 +13,11 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row  mt-5">
   <div class="col-12">
+    <div *ngIf="alert.mostrar">
+        <ngb-alert [type]="alert.type" (close)="close()">{{ alert.mensagem }} </ngb-alert>
+    </div>
     <table class="table  table-striped">
       <thead>
         <tr>
@@ -27,11 +30,12 @@
           <td >{{ categoria.nome }}</td>
           <td class="col-acoes">
             <a href="#" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" (click)="excluir(categoria)"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>
     </table>
+    <ngb-pagination [boundaryLinks]=true [collectionSize]="totalElementos" [pageSize]="5" [(page)]="filtro.paginaAtual" (pageChange)="loadPage($event)"></ngb-pagination>
   </div>
   <div class="col-12">
       <a routerLink="/categorias/nova" class="btn  btn-primary"><fa-icon [icon]="faPlus"></fa-icon> Nova</a>

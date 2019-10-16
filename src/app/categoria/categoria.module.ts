@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoriaRoutingModule } from './app.categoria-routing.module';
 
@@ -17,6 +20,9 @@ import { CategoriaService } from './categoria.service';
   imports: [
     CommonModule,
     FormsModule,
+    NgbPaginationModule,
+    NgbTooltipModule,
+    NgbAlertModule,
 
     FontAwesomeModule,
 

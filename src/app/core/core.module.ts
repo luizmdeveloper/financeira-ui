@@ -11,7 +11,6 @@ import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatePTParserFormatter } from '../NgbDatePTParserFormatter';
 import { CustomDatepickerI18n, I18n } from '../CustomDatepickerI18n';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
 
@@ -46,7 +45,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
     FontAwesomeModule,
     NgbModule,
-    NgbTooltipModule,
     CurrencyMaskModule,
 
     DashboardModule,
