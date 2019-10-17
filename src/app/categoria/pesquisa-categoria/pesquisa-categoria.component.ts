@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Alert } from 'src/app/core/model';
 import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CategoriaService } from './../categoria.service';
+import { ErroHandlerService } from './../../core/erro-handler.service';
 import { CategoriaFiltro } from '../modelo-filtro';
-import { Alert } from 'src/app/core/model';
 
 @Component({
   selector: 'app-pesquisa-categoria',
@@ -21,7 +22,8 @@ export class PesquisaCategoriaComponent implements OnInit {
   faPen = faPen;
   faPlus = faPlus;
 
-  constructor(private categoriaService: CategoriaService) { }
+  constructor(private categoriaService: CategoriaService,
+              private erroHandlerService: ErroHandlerService) { }
 
   ngOnInit() {
     this.alert = new Alert();
@@ -32,6 +34,9 @@ export class PesquisaCategoriaComponent implements OnInit {
           .then( resultado => {
               this.categorias = resultado.categorias;
               this.totalElementos = resultado.totalElementos;
+          })
+          .catch(erro => {
+            this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));
           });
   }
 
@@ -41,10 +46,14 @@ export class PesquisaCategoriaComponent implements OnInit {
   }
 
   excluir(categoria: any) {
-    this.categoriaService.excluir(categoria.codigo).then(() => {
-       this.showAlert(true, 'success', 'Categoria excluída com sucesso!');
-       this.pesquisar();
-    });
+    this.categoriaService.excluir(categoria.codigo)
+        .then(() => {
+          this.showAlert(true, 'success', 'Categoria excluída com sucesso!');
+          this.pesquisar();
+        })
+        .catch(erro => {
+          this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));
+        });
   }
 
   close() {

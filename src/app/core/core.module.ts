@@ -1,10 +1,10 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbDatepickerI18n } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +22,7 @@ import { SegurancaModule } from './../seguranca/seguranca.module';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OauthService } from '../seguranca/oauth.service';
+import { ErroHandlerService } from './erro-handler.service';
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'right',
@@ -46,6 +47,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     FontAwesomeModule,
     NgbModule,
     CurrencyMaskModule,
+    SweetAlert2Module.forRoot(),
 
     DashboardModule,
     CategoriaModule,
@@ -54,7 +56,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     SegurancaModule
   ],
   exports: [
-    NavBarComponent
+    NavBarComponent,
+    SweetAlert2Module
   ],
   providers: [
     [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
@@ -62,6 +65,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     HttpClient,
     OauthService,
+    ErroHandlerService
   ]
 })
 export class CoreModule { }
