@@ -38,10 +38,23 @@ export class CategoriaService {
               });
   }
 
+  public buscarTodas(): Promise<any> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.get(this.categoriaUrl, { headers }).toPromise()
+          .then(response => {
+            const content = response['content'];
+            const categorias = {
+              categoria: content
+            }
+
+            return categorias;
+          });
+  }
+
   excluir(codigo: number): Promise<void> {
     const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
 
     return this.http.delete(`${this.categoriaUrl}/${codigo}`, { headers }).toPromise().then(() => null);
   }
-
 }
