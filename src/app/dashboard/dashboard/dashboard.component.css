@@ -1,0 +1,15 @@
+.icon-big {
+  font-size: 4em;
+  min-height: 84px;
+}
+
+.card-category {
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.card__value {
+  font-size: 1.69em;
+  font-weight: 300;
+  text-align: right;
+}

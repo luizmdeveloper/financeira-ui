@@ -1,1 +1,64 @@
-<h2>dashboard works!</h2>
+<div class="row">
+  <!-- Saldo carteira no mês/ano -->
+  <div class="col-12  col-lg-4  col-md-4  col-sm-4  mt-2">
+    <div class="card  card-stats">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5  col-md-4">
+            <div class="icon-big  text-center">
+                <fa-icon [icon]="faCashRegister" class="text-warning"></fa-icon>
+            </div>
+          </div>
+          <div class="col-7  col-md-8">
+            <div class="numbers  text-right">
+              <p class="card__value">R$ 120,00<p>
+              <h5>Caixa</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saldo no banco no mês/ano -->
+  <div class="col-12  col-lg-4  col-md-4  col-sm-4  mt-2">
+    <div class="card  card-stats">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5  col-md-4">
+            <div class="icon-big  text-center">
+                <fa-icon [icon]="faChartBar" class="text-success"></fa-icon>
+            </div>
+          </div>
+          <div class="col-7  col-md-8">
+            <div class="numbers  text-right">
+              <p class="card__value">R$ 120,00<p>
+              <h5>Banco</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card quantidade de transações no mês/ano -->
+  <div class="col-12  col-lg-4  col-md-4  col-sm-4  mt-2">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5  col-md-4">
+            <div class="icon-big  text-center">
+                <fa-icon [icon]="faChartLine" class="text-danger"></fa-icon>
+            </div>
+          </div>
+          <div class="col-7  col-md-8">
+            <div class="numbers  text-right">
+              <p class="card__value">5<p>
+              <h5>Transações</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
