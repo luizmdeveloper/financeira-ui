@@ -6,8 +6,9 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CategoriaRoutingModule } from './app.categoria-routing.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+import { CategoriaRoutingModule } from './app.categoria-routing.module';
 import { PesquisaCategoriaComponent } from './pesquisa-categoria/pesquisa-categoria.component';
 import { CadastroCategoriaComponent } from './cadastro-categoria/cadastro-categoria.component';
 import { CategoriaService } from './categoria.service';
@@ -23,6 +24,7 @@ import { CategoriaService } from './categoria.service';
     NgbPaginationModule,
     NgbTooltipModule,
     NgbAlertModule,
+    SweetAlert2Module,
 
     FontAwesomeModule,
 

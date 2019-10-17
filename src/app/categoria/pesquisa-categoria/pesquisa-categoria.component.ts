@@ -24,7 +24,6 @@ export class PesquisaCategoriaComponent implements OnInit {
   constructor(private categoriaService: CategoriaService) { }
 
   ngOnInit() {
-    this.pesquisar();
     this.alert = new Alert();
   }
 
