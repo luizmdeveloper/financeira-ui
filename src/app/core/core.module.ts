@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
+import { LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 import { NgxMaskModule } from 'ngx-mask-2';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
@@ -20,10 +23,14 @@ import { TransacaoModule } from '../transacao/transacao.module';
 import { ContaModule } from '../conta/conta.module';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { SegurancaModule } from './../seguranca/seguranca.module';
-
+import { TransacaoService } from './../transacao/transacao.service';
+import { CategoriaService } from './../categoria/categoria.service';
+import { ContaService } from './../conta/conta.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OauthService } from '../seguranca/oauth.service';
 import { ErroHandlerService } from './erro-handler.service';
+
+registerLocaleData(localePt);
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'right',
@@ -65,9 +72,13 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     [I18n, { provide: NgbDatepickerI18n, useClass: CustomDatepickerI18n }],
     [{provide: NgbDateParserFormatter, useClass: NgbDatePTParserFormatter}],
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
+    { provide: LOCALE_ID, useValue: 'pt' },
     HttpClient,
     OauthService,
-    ErroHandlerService
+    ErroHandlerService,
+    ContaService,
+    CategoriaService,
+    TransacaoService
   ]
 })
 export class CoreModule { }

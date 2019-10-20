@@ -29,9 +29,6 @@ import { CadastroContaComponent } from './cadastro-conta/cadastro-conta.componen
   exports: [
     PesquisaContaComponent,
     CadastroContaComponent
-  ],
-  providers: [
-    ContaService
   ]
 })
 export class ContaModule { }

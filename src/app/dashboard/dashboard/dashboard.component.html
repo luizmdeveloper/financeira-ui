@@ -6,12 +6,12 @@
         <div class="row">
           <div class="col-5  col-md-4">
             <div class="icon-big  text-center">
-                <fa-icon [icon]="faCashRegister" class="text-warning"></fa-icon>
+              <fa-icon [icon]="faCashRegister" class="text-warning"></fa-icon>
             </div>
           </div>
           <div class="col-7  col-md-8">
             <div class="numbers  text-right">
-              <p class="card__value">R$ 120,00<p>
+              <p class="card__value" [style.color]="totais.carteira > 0 ? 'blue' : 'red'">{{ totais.carteira | currency:'BRL' }}<p>
               <h5>Caixa</h5>
             </div>
           </div>
@@ -32,7 +32,7 @@
           </div>
           <div class="col-7  col-md-8">
             <div class="numbers  text-right">
-              <p class="card__value">R$ 120,00<p>
+              <p class="card__value">{{ totais.banco | currency:'BRL' }}<p>
               <h5>Banco</h5>
             </div>
           </div>
@@ -53,11 +53,46 @@
           </div>
           <div class="col-7  col-md-8">
             <div class="numbers  text-right">
-              <p class="card__value">5<p>
+              <p class="card__value">{{ totais.quantidadeTransacoes }}<p>
               <h5>Transações</h5>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row  mt-3">
+  <div class="col-12  col-sm-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Transações no período</h5>
+        <canvas baseChart
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+        </canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12  col-sm-4  mt-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Transações por categoria</h5>
+        <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          [options]="pieChartOptions"
+          [plugins]="pieChartPlugins"
+          [colors]="pierchartColors"
+          [legend]="pieChartLegend">
+        </canvas>
       </div>
     </div>
   </div>

@@ -30,9 +30,6 @@ import { CategoriaService } from './categoria.service';
 
     CategoriaRoutingModule
   ],
-  exports: [],
-  providers: [
-    CategoriaService
-  ]
+  exports: []
 })
 export class CategoriaModule { }
