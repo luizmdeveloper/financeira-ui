@@ -27,6 +27,7 @@ export class PesquisaCategoriaComponent implements OnInit {
 
   ngOnInit() {
     this.alert = new Alert();
+    this.pesquisar();
   }
 
   pesquisar() {

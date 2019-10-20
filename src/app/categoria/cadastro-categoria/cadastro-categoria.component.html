@@ -1,7 +1,7 @@
 <div>
   <div class="row">
     <div class="col-12">
-      <h2>Nova categoria</h2>
+      <h2>{{ editando ? 'Edição de' : 'Nova' }} categoria</h2>
     </div>
   </div>
 </div>
@@ -9,10 +9,8 @@
 <form #f="ngForm" (ngSubmit)="salvar(f)">
   <div class="row">
     <div class="col-12" *ngIf="alert.mostrar">
-        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+      <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
     </div>
-
-    <input type="hidden" name="codigo" [(ngModel)]="categoria.codigo">
     <div class="col-12">
       <div class="form-group">
         <label class="control-label  info-required" for="nome">Nome</label>

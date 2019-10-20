@@ -39,6 +39,17 @@ export class CategoriaService {
               });
   }
 
+  public buscarPorCodigo(codigo: number): Promise<any> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.get(`${this.categoriaUrl}/${codigo}`, { headers }).toPromise()
+                      .then(response => {
+                          const categoria = response;
+                          return categoria;
+                      });
+
+  }
+
   public buscarTodas(): Promise<any> {
     const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
 
@@ -70,7 +81,7 @@ export class CategoriaService {
                       .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
                       .append('Content-Type', 'application/json');
 
-    return this.http.post(`${this.categoriaUrl}/${codigo}`, categoria, { headers }).toPromise()
+    return this.http.put(`${this.categoriaUrl}/${codigo}`, categoria, { headers }).toPromise()
           .then(response => {
                 const categoria = response;
                 return categoria;
