@@ -1,22 +1,25 @@
-<div class="m-2">
+<div class="">
     <div class="row">
       <div class="col-12">
-        <h2>Nova conta</h2>
+        <h2>{{ editando ? 'Edição de': 'Nova'}} conta</h2>
       </div>
     </div>
   </div>
 
-  <form action="#" method="POST">
+  <form #f="ngForm" (ngSubmit)="salvar(f)">
     <div class="row">
+      <div class="col-12" *ngIf="alert.mostrar">
+        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+      </div>
       <div class="col-12">
         <div class="form-group">
           <label class="control-label  info-required" for="nome">Nome</label>
-          <input type="text" class="form-control" nome="nome" id="nome" autofocus autocomplete="false"/>
+          <input type="text" class="form-control" name="nome" id="nome" autofocus [(ngModel)]="conta.nome" required/>
         </div>
       </div>
       <div class="col-12">
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="banco">
+          <input type="checkbox" class="custom-control-input" name="banco" id="banco" [(ngModel)]="conta.banco">
           <label class="custom-control-label" for="banco">Banco</label>
         </div>
       </div>
@@ -24,7 +27,7 @@
     <div class="row  text-right">
       <div class="col-12">
         <a routerLink="/contas" class="btn  btn-outline-primary  mr-2">Voltar</a>
-        <input type="submit" class="btn  btn-primary" value="Salvar">
+        <input type="submit" class="btn  btn-primary" value="Salvar" [disabled]="f.invalid">
       </div>
     </div>
   </form>

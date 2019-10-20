@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Alert } from 'src/app/core/model';
+import { Contafiltro } from './../modelo.filtro';
+import { ErroHandlerService } from './../../core/erro-handler.service';
+import { ContaService } from './../conta.service';
 
 @Component({
   selector: 'app-pesquisa-conta',
@@ -9,18 +13,48 @@ import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 })
 export class PesquisaContaComponent implements OnInit {
 
-  contas = [
-    { codigo: 1, nome: 'Carteira', banco: false },
-    { codigo: 2, nome: 'Banco do Brasil', banco: true }
-  ];
+  alert: Alert;
+  filtro = new Contafiltro();
+  contas = [];
+  totalElementos: number;
 
   faTrash = faTrash;
   faPen = faPen;
   faPlus = faPlus;
 
-  constructor() { }
+  constructor(private contaService: ContaService,
+              private erroHandlerService: ErroHandlerService) { }
 
   ngOnInit() {
+    this.alert = new Alert();
+
+    this.pesquisar();
+  }
+
+  pesquisar(){
+    this.contaService.filtrar(this.filtro)
+      .then(resultado => {
+        this.contas = resultado.contas;
+        this.totalElementos = resultado.totalRegistro;
+      })
+      .catch(erro => {
+        this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));
+      })
+  }
+
+  loadPage() {
+    this.filtro.paginaAtual = this.filtro.paginaAtual - 1;
+    this.pesquisar();
+  }
+
+  showAlert(mostra: boolean, type: string, mensagem: string) {
+    this.alert.mostrar = mostra;
+    this.alert.type = type;
+    this.alert.mensagem = mensagem;
+  }
+
+  closeAlert(){
+    this.showAlert(false, '', '');
   }
 
 }
