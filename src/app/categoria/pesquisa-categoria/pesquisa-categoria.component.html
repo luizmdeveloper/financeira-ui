@@ -16,7 +16,7 @@
 <div class="row  mt-5">
   <div class="col-12">
     <div *ngIf="alert.mostrar">
-        <ngb-alert [type]="alert.type" (close)="close()">{{ alert.mensagem }} </ngb-alert>
+        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
     </div>
     <table class="table  table-striped">
       <thead>

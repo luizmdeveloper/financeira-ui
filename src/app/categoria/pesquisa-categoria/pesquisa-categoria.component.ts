@@ -56,7 +56,7 @@ export class PesquisaCategoriaComponent implements OnInit {
         });
   }
 
-  close() {
+  closeAlert() {
     this.showAlert(false, '', '');
   }
 

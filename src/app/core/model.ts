@@ -3,3 +3,8 @@ export class Alert {
   type = '';
   mensagem = '';
 }
+
+export class Categoria {
+  codigo: number;
+  nome: string;
+}

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+import { NgxMaskModule } from 'ngx-mask-2';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -48,6 +49,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgbModule,
     CurrencyMaskModule,
     SweetAlert2Module.forRoot(),
+    NgxMaskModule.forRoot(),
 
     DashboardModule,
     CategoriaModule,

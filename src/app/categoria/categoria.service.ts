@@ -1,3 +1,4 @@
+import { Categoria } from './../core/model';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -50,6 +51,30 @@ export class CategoriaService {
 
             return categorias;
           });
+  }
+
+  salvar(categoria: Categoria): Promise<any> {
+    const headers = new HttpHeaders()
+                      .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                      .append('Content-Type', 'application/json');
+
+    return this.http.post(this.categoriaUrl, categoria, { headers }).toPromise()
+          .then(response => {
+                const categoria = response;
+                return categoria;
+              });
+  }
+
+  atualizar(codigo: number, categoria: Categoria): Promise<any> {
+    const headers = new HttpHeaders()
+                      .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                      .append('Content-Type', 'application/json');
+
+    return this.http.post(`${this.categoriaUrl}/${codigo}`, categoria, { headers }).toPromise()
+          .then(response => {
+                const categoria = response;
+                return categoria;
+              });
   }
 
   excluir(codigo: number): Promise<void> {

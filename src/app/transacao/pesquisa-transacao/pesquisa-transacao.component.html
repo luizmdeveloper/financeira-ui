@@ -1,10 +1,10 @@
-<div class="m-2">
+<div>
   <div class="row">
     <div class="col-12">
       <h2>Pesquisa de transação</h2>
     </div>
   </div>
-  <form action="#" method="GET">
+  <form action="#" method="GET" autocomplete="off">
     <div class="row">
       <div class="col-12  col-sm-6">
         <div class="form-group">
@@ -28,7 +28,7 @@
         <div class="form-group">
           <label class="control-label" for="data-inicial">Data inicial</label>
           <div class="input-group">
-            <input class="form-control" placeholder="dd/mm/yyyy" name="data-inicial" id="data-inicial" ngbDatepicker [footerTemplate]="footerTemplate" #dataInicial="ngbDatepicker">
+            <input class="form-control" type="text" placeholder="dd/mm/yyyy"  name="data-inicial" id="data-inicial" ngbDatepicker [footerTemplate]="footerTemplate" #dataInicial="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn  btn-outline-secondary  calendar" (click)="dataInicial.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
             </div>
@@ -51,7 +51,7 @@
       <div class="col-12">
         <div class="form-group">
           <label class="control-label" for="observacao">Observação</label>
-          <input class="form-control" type="text" name="observacao" id="observacao"/>
+          <input class="form-control" type="text" mask="99/99/9999" name="observacao" id="observacao"/>
         </div>
       </div>
     </div>

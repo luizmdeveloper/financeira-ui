@@ -1,4 +1,4 @@
-<div class="m-2">
+<div>
   <div class="row">
     <div class="col-12">
       <h2>Nova categoria</h2>
@@ -6,19 +6,24 @@
   </div>
 </div>
 
-<form action="#" method="POST">
+<form #f="ngForm" (ngSubmit)="salvar(f)">
   <div class="row">
+    <div class="col-12" *ngIf="alert.mostrar">
+        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+    </div>
+
+    <input type="hidden" name="codigo" [(ngModel)]="categoria.codigo">
     <div class="col-12">
       <div class="form-group">
         <label class="control-label  info-required" for="nome">Nome</label>
-        <input type="text" class="form-control" nome="nome" id="nome" autofocus autocomplete="false"/>
+        <input type="text" class="form-control" name="nome" id="nome" autofocus [(ngModel)]="categoria.nome" required/>
       </div>
     </div>
   </div>
   <div class="row  text-right">
     <div class="col-12">
       <a routerLink="/categorias" class="btn  btn-outline-primary  mr-2">Voltar</a>
-      <input type="submit" class="btn  btn-primary" value="Salvar">
+      <input type="submit" class="btn  btn-primary" value="Salvar" [disabled]="f.invalid">
     </div>
   </div>
 </form>
