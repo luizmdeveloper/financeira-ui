@@ -51,7 +51,18 @@ export class ContaService {
                 });
   }
 
-  atualizar(codigo:number, conta: Conta): Promise<any> {
+  buscarTodos(): Promise<any> {
+    const headers = new HttpHeaders()
+                        .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.get(`${this.contaUrl}`, {headers}).toPromise()
+                .then(resultado => {
+                    const conta = resultado['content'];
+                    return conta;
+                });
+  }
+
+  atualizar(codigo: number, conta: Conta): Promise<any> {
     const headers = new HttpHeaders()
                         .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
                         .append('Content-Type', 'application/json');

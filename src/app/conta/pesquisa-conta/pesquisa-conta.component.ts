@@ -45,6 +45,7 @@ export class PesquisaContaComponent implements OnInit {
   loadPage() {
     this.filtro.paginaAtual = this.filtro.paginaAtual - 1;
     this.pesquisar();
+    this.filtro.paginaAtual = this.filtro.paginaAtual + 1;
   }
 
   showAlert(mostra: boolean, type: string, mensagem: string) {

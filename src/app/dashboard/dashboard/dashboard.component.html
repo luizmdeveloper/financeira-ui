@@ -11,7 +11,7 @@
           </div>
           <div class="col-7  col-md-8">
             <div class="numbers  text-right">
-              <p class="card__value" [style.color]="totais.carteira > 0 ? 'blue' : 'red'">{{ totais.carteira | currency:'BRL' }}<p>
+              <p class="card__value" [style.color]="totais.carteira >= 0 ? 'blue' : 'red'">{{ totais.carteira | currency:'BRL' }}<p>
               <h5>Caixa</h5>
             </div>
           </div>

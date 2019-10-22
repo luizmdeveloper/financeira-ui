@@ -44,6 +44,7 @@ export class PesquisaCategoriaComponent implements OnInit {
   loadPage() {
     this.filtro.paginaAtual = this.filtro.paginaAtual - 1;
     this.pesquisar();
+    this.filtro.paginaAtual = this.filtro.paginaAtual + 1;
   }
 
   excluir(categoria: any) {

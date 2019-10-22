@@ -11,16 +11,16 @@
     <div class="col-12  col-sm-6">
       <div class="form-group">
         <label class="control-label  info-required" for="categoria">Categoria</label>
-        <select class="form-control" nome="categoria" id="categoria" autofocus>
-          <option value="0">Selecione</option>
+        <select class="form-control" name="categoria" id="categoria" autofocus [(ngModel)]="transacao.categoria">
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria" >{{categoria.nome}}</option>
         </select>
       </div>
     </div>
     <div class="col-12  col-sm-6">
       <div class="form-group">
-        <label class="control-label  info-required" for="data">Data</label>
+        <label class="control-label  info-required" for="emissao">Data</label>
         <div class="input-group">
-          <input class="form-control" placeholder="dd/mm/yyyy" name="data" id="data" ngbDatepicker [footerTemplate]="footerTemplate" #data="ngbDatepicker">
+          <input class="form-control" rInputMask="99/99/9999" placeholder="dd/mm/yyyy" name="emissao" id="emissao" [(ngModel)]="transacao.emissao" ngbDatepicker [footerTemplate]="footerTemplate" #data="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn  btn-outline-secondary  calendar" (click)="data.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
           </div>
@@ -40,37 +40,22 @@
           <input type="radio" id="debito" name="tipoTransacao" class="custom-control-input" value="D">
           <label class="custom-control-label" for="debito">Débito</label>
         </div>
-        <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="transferencia" name="tipoTransacao" class="custom-control-input" value="T">
-          <label class="custom-control-label" for="transferencia">Transferência</label>
-        </div>
       </div>
     </div>
 
     <div class="col-12  col-sm-4">
       <div class="form-group">
         <label class="control-label  info-required" for="conta">Conta</label>
-        <select class="form-control" nome="conta" id="conta">
-          <option value="0">Selecione</option>
+        <select class="form-control" name="conta" id="conta" [(ngModel)]="transacao.conta">
+          <option *ngFor="let conta of contas" [ngValue]="conta">{{conta.nome}}</option>
         </select>
       </div>
     </div>
 
-    <div class="col-12  col-sm-4">
-      <div class="form-group">
-        <label class="control-label  info-required" for="transferencia">Transferência</label>
-        <select class="form-control" nome="transferencia" id="transferencia" disabled>
-          <option value="0">Selecione</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col-12  col-sm-4">
       <div class="form-group">
         <label class="control-label  info-required" for="valor">Valor</label>
-        <input type="text" class="form-control" nome="valor" id="valor" currencyMask autocomplete="off">
+        <input type="text" class="form-control" nome="valor" id="valor" [(ngModel)]="transacao.valor" currencyMask autocomplete="off">
       </div>
     </div>
   </div>
@@ -79,7 +64,7 @@
     <div class="col-12">
       <div class="form-group">
         <label class="control-label" for="observacao">Observação</label>
-        <textarea class="form-control" id="observacao" rows="5" autocomplete="false"></textarea>
+        <textarea class="form-control" name="observacao" id="observacao" [(ngModel)]="transacao.observacao" rows="5" autocomplete="false"></textarea>
       </div>
     </div>
   </div>

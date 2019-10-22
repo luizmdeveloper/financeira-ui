@@ -56,11 +56,7 @@ export class CategoriaService {
     return this.http.get(this.categoriaUrl, { headers }).toPromise()
           .then(response => {
             const content = response['content'];
-            const categorias = {
-              categoria: content
-            }
-
-            return categorias;
+            return content;
           });
   }
 

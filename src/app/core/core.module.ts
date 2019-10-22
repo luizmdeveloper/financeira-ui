@@ -1,4 +1,3 @@
-import { CustomDateParserFormatter } from './../CustomDateParserFormatter';
 import { NgModule } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -72,7 +71,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     [{provide: NgbDateParserFormatter, useClass: NgbDatePTParserFormatter}],
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: LOCALE_ID, useValue: 'pt' },
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
     HttpClient,
     OauthService,
     ErroHandlerService,

@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { faCalendar, faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import { TransacaoFiltro } from '../model-filtro';
+import { CategoriaService } from 'src/app/categoria/categoria.service';
+import { ContaService } from 'src/app/conta/conta.service';
+import { TransacaoService } from '../transacao.service';
+
 @Component({
   selector: 'app-pesquisa-transacao',
   templateUrl: './pesquisa-transacao.component.html',
@@ -9,21 +14,56 @@ import { faCalendar, faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-
 })
 export class PesquisaTransacaoComponent implements OnInit {
 
-  transacoes = [
-    {codigo: 1, categoria: 'Salário', conta: 'Carteira', data: '02/10/2019', tipoTransacao: 'C', valor: 2200, conciliado: true},
-    {codigo: 2, categoria: 'Investimento', conta: 'Carteira', data: '05/10/2019', tipoTransacao: 'D', valor: 600, conciliado: false},
-    {codigo: 3, categoria: 'Impostos', conta: 'Carteira', data: '05/10/2019', tipoTransacao: 'D', valor: 205.5, conciliado: true},
-    {codigo: 3, categoria: 'Depesasas bancárias', conta: 'Banco do Brasil', data: '05/10/2019', tipoTransacao: 'D', valor: 25, conciliado: true}
-  ]
+  categorias = [{codigo: 0, nome: 'Selecione'}];
+  contas = [{codigo: 0, nome: 'Selecione'}];
+  filtro = new TransacaoFiltro();
+  totalElementos: number;
+
+  transacoes = [];
 
   faCalendar = faCalendar;
   faTrash = faTrash;
   faPen = faPen;
   faPlus = faPlus;
 
-  constructor() { }
+  constructor(private categoriaService: CategoriaService,
+              private contaService: ContaService,
+              private transacaoService: TransacaoService) { }
 
   ngOnInit() {
+    this.carregarTodasCategorias();
+    this.carregarTodasContas();
+    this.pesquisar();
+  }
+
+  carregarTodasCategorias() {
+    this.categoriaService.buscarTodas().then(categorias => {
+      categorias.forEach(categoria => {
+        this.categorias.push(categoria);
+      });
+    });
+  }
+
+  carregarTodasContas() {
+    this.contaService.buscarTodos().then(contas => {
+
+      contas.forEach(conta => {
+        this.contas.push(conta);
+      });
+    });
+  }
+
+  pesquisar() {
+    this.transacaoService.filtrar(this.filtro).then(resultado => {
+      this.transacoes = resultado.transacoes;
+      this.totalElementos = resultado.totalElementos;
+    });
+  }
+
+  loadEvent() {
+    this.filtro.paginaAtual = this.filtro.paginaAtual - 1;
+    this.pesquisar();
+    this.filtro.paginaAtual = this.filtro.paginaAtual + 1;
   }
 
 }
