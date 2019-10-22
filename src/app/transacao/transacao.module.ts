@@ -1,7 +1,7 @@
-import { TransacaoService } from './transacao.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { InputMaskModule } from 'racoon-mask-raw';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TransacaoRoutingModule } from './app.transacao-routing.module';
@@ -17,6 +17,7 @@ import { CadastroTransacaoComponent } from './cadastro-transacao/cadastro-transa
   imports: [
     CommonModule,
 
+    InputMaskModule,
     FontAwesomeModule,
     NgbDatepickerModule,
 

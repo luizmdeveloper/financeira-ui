@@ -1,3 +1,4 @@
+import { CustomDateParserFormatter } from './../CustomDateParserFormatter';
 import { NgModule } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +8,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 
-import { NgxMaskModule } from 'ngx-mask-2';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -56,7 +56,6 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     NgbModule,
     CurrencyMaskModule,
     SweetAlert2Module.forRoot(),
-    NgxMaskModule.forRoot(),
 
     DashboardModule,
     CategoriaModule,
@@ -73,6 +72,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     [{provide: NgbDateParserFormatter, useClass: NgbDatePTParserFormatter}],
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
     HttpClient,
     OauthService,
     ErroHandlerService,

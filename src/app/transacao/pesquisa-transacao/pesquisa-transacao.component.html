@@ -28,7 +28,7 @@
         <div class="form-group">
           <label class="control-label" for="data-inicial">Data inicial</label>
           <div class="input-group">
-            <input class="form-control" type="text" placeholder="dd/mm/yyyy"  name="data-inicial" id="data-inicial" ngbDatepicker [footerTemplate]="footerTemplate" #dataInicial="ngbDatepicker">
+            <input class="form-control" type="text" rInputMask="99/99/9999" placeholder="dd/mm/yyyy"  name="data-inicial" id="data-inicial" ngbDatepicker [footerTemplate]="footerTemplate" #dataInicial="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn  btn-outline-secondary  calendar" (click)="dataInicial.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
             </div>
@@ -39,7 +39,7 @@
         <div class="form-group">
           <label class="control-label" for="data-inicial">Data final</label>
           <div class="input-group">
-            <input class="form-control" placeholder="dd/mm/yyyy" name="data-final" id="data-final" ngbDatepicker [footerTemplate]="footerTemplate" #dataFinal="ngbDatepicker">
+            <input class="form-control" rInputMask="99/99/9999" placeholder="dd/mm/yyyy" name="data-final" id="data-final" ngbDatepicker [footerTemplate]="footerTemplate" #dataFinal="ngbDatepicker">
             <div class="input-group-append">
               <button class="btn  btn-outline-secondary  calendar" (click)="dataFinal.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
             </div>
