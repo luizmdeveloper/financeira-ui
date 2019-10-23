@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { faCalendar, faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { TransacaoFiltro } from '../model-filtro';
@@ -19,6 +20,8 @@ export class PesquisaTransacaoComponent implements OnInit {
   filtro = new TransacaoFiltro();
   totalElementos: number;
 
+  emissaoDe: NgbDateStruct;
+  emissaoAte: NgbDateStruct;
   transacoes = [];
 
   faCalendar = faCalendar;
@@ -45,8 +48,8 @@ export class PesquisaTransacaoComponent implements OnInit {
   }
 
   carregarTodasContas() {
-    this.contaService.buscarTodos().then(contas => {
 
+    this.contaService.buscarTodos().then(contas => {
       contas.forEach(conta => {
         this.contas.push(conta);
       });
@@ -54,6 +57,11 @@ export class PesquisaTransacaoComponent implements OnInit {
   }
 
   pesquisar() {
+    if (this.emissaoDe)
+       this.filtro.dataDe = new Date(this.emissaoDe.year, this.emissaoDe.month -1, this.emissaoDe.day, 0, 0, 0);
+    if (this.emissaoAte)
+       this.filtro.dataAte = new Date(this.emissaoAte.year, this.emissaoAte.month -1, this.emissaoAte.day, 0, 0, 0);
+    console.log(this.filtro);
     this.transacaoService.filtrar(this.filtro).then(resultado => {
       this.transacoes = resultado.transacoes;
       this.totalElementos = resultado.totalElementos;

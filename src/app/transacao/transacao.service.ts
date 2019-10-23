@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TransacaoFiltro } from './model-filtro';
 
+import * as moment from 'moment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,13 +34,13 @@ export class TransacaoService {
       params = params.set('observacao', filtro.observacao);
     }
 
-    // if (filtro.dataDe != null) {
-    //   params = params.set('emissaoDe', moment(filtro.dataDe).format('YYYY'));
-    // }
+    if (filtro.dataDe) {
+      params = params.set('emissaoDe', moment(filtro.dataDe).format('YYYY-MM-DD'));
+    }
 
-    // if (filtro.dataAte != null) {
-    //   params = params.set('emissaoAte', moment(filtro.dataAte).format('YYYY-MM-DD'));
-    // }
+    if (filtro.dataAte) {
+      params = params.set('emissaoAte', moment(filtro.dataAte).format('YYYY-MM-DD'));
+    }
 
     return this.http.get(this.transacaoUrl, { headers, params }).toPromise()
                   .then(response => {
