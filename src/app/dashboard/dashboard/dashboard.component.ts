@@ -31,12 +31,6 @@ export class DashboardComponent implements OnInit {
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  barChartColors: Array<any> = [
-    {
-      backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
-      '#DD4477', '#3366CC', '#DC3912']
-    }
-  ];
 
   barChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
