@@ -51,7 +51,7 @@ export class PesquisaCategoriaComponent implements OnInit {
     this.categoriaService.excluir(categoria.codigo)
         .then(() => {
           this.showAlert(true, 'success', 'Categoria excluída com sucesso!');
-          this.pesquisar();
+          this.loadPage();
         })
         .catch(erro => {
           this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));

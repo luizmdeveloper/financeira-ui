@@ -54,8 +54,19 @@ export class PesquisaContaComponent implements OnInit {
     this.alert.mensagem = mensagem;
   }
 
-  closeAlert(){
+  closeAlert() {
     this.showAlert(false, '', '');
+  }
+
+  excluir(conta) {
+    this.contaService.excluir(conta.codigo)
+          .then(() => {
+            this.showAlert(true, 'success', 'Conta excluída com sucesso!');
+            this.loadPage();
+          })
+          .catch(erro => {
+            this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));
+          });
   }
 
 }

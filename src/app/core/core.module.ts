@@ -33,7 +33,7 @@ registerLocaleData(localePt);
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
   align: 'right',
-  allowNegative: true,
+  allowNegative: false,
   decimal: ',',
   precision: 2,
   prefix: '',

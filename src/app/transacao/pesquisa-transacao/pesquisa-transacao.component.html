@@ -51,7 +51,7 @@
       <div class="col-12">
         <div class="form-group">
           <label class="control-label" for="observacao">Observação</label>
-          <input class="form-control" type="text" mask="99/99/9999" name="observacao" id="observacao" [(ngModel)]="filtro.observacao"/>
+          <input class="form-control" type="text" name="observacao" id="observacao" [(ngModel)]="filtro.observacao"/>
         </div>
       </div>
     </div>
@@ -60,6 +60,12 @@
 </div>
 
 <div class="row  mt-5">
+  <div class="col-12">
+    <div *ngIf="alert.mostrar">
+      <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+    </div>
+  </div>
+
   <div class="col-12">
     <table class="table  table-striped">
       <thead>
@@ -82,8 +88,8 @@
           <td [style.color]="transacao.tipoTransacao == 'C' ? 'blue' : 'red'">{{ transacao.valor | currency:'BRL' }}</td>
           <td><a href="#" placement="top" [ngbTooltip]="transacao.conciliado ? 'Desconciliar': 'Conciliar'">{{ transacao.conciliado }}</a></td>
           <td class="col-acoes">
-            <a href="#" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <a [routerLink]="['/transacoes', transacao.codigo]" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [swal]="deleteSwal" (confirm)="excluir(transacao)"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>
@@ -94,3 +100,15 @@
       <a routerLink="/transacoes/novo" class="btn  btn-primary"><fa-icon [icon]="faPlus"></fa-icon> Nova</a>
   </div>
 </div>
+
+
+<swal
+  #deleteSwal
+  title="Transação"
+  text="Deseja realmente excluir?"
+  type="question"
+  confirmButtonText="Sim"
+  cancelButtonText="Cancelar"
+  [showCancelButton]="true"
+  [focusCancel]="true">
+</swal>

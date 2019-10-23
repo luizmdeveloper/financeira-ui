@@ -16,7 +16,7 @@
 <div class="row  mt-5">
   <div class="col-12">
     <div *ngIf="alert.mostrar">
-        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+      <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
     </div>
     <table class="table  table-striped">
       <thead>
@@ -30,7 +30,7 @@
           <td>{{ conta.nome }}</td>
           <td class="col-acoes">
             <a [routerLink]="['/contas', conta.codigo]" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [swal]="deleteSwal" (confirm)="excluir(conta)"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>
@@ -41,3 +41,14 @@
       <a routerLink="/contas/nova" class="btn  btn-primary"><fa-icon [icon]="faPlus"></fa-icon> Nova</a>
   </div>
 </div>
+
+<swal
+  #deleteSwal
+  title="Conta"
+  text="Deseja realmente excluir?"
+  type="question"
+  confirmButtonText="Sim"
+  cancelButtonText="Cancelar"
+  [showCancelButton]="true"
+  [focusCancel]="true">
+</swal>

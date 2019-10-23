@@ -19,9 +19,9 @@ export class Transacao {
   codigo: number;
   categoria: Categoria = new Categoria();
   conta: Conta = new Conta();
-  tipo: String = '';
+  tipo: String;
   observacao: string;
-  dataEmisssao: Date;
+  data: Date = new Date();
   valor: number;
 }
 

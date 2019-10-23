@@ -76,9 +76,8 @@ export class ContaService {
   }
 
   salvar(conta: Conta): Promise<any> {
-    const headers = new HttpHeaders()
-                        .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                        .append('Content-Type', 'application/json');
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                                     .append('Content-Type', 'application/json');
 
     return this.http.post(this.contaUrl, conta, {headers}).toPromise()
                 .then(resposta => {
@@ -86,6 +85,13 @@ export class ContaService {
 
                   return conta;
                 });
+  }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.delete(`${this.contaUrl}/${codigo}`, { headers }).toPromise()
+                 .then(() => null);
   }
 
 }

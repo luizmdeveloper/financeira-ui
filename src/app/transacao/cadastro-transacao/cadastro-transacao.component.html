@@ -1,18 +1,23 @@
 <div class="m-2">
   <div class="row">
     <div class="col-12">
-      <h2>Nova transação</h2>
+      <h2>{{ editando ? 'Edição de' : 'Nova'}} transação</h2>
     </div>
   </div>
 </div>
 
-<form action="#" method="POST">
+<form autocomplete="off" #f="ngForm" (ngSubmit)="salvar(f)">
   <div class="row">
+    <div class="col-12">
+      <div *ngIf="alert.mostrar">
+        <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+      </div>
+    </div>
     <div class="col-12  col-sm-6">
       <div class="form-group">
         <label class="control-label  info-required" for="categoria">Categoria</label>
-        <select class="form-control" name="categoria" id="categoria" autofocus [(ngModel)]="transacao.categoria">
-          <option *ngFor="let categoria of categorias" [ngValue]="categoria" >{{categoria.nome}}</option>
+        <select class="form-control" name="categoria" id="categoria" autofocus [(ngModel)]="transacao.categoria.codigo" required>
+          <option *ngFor="let categoria of categorias" [ngValue]="categoria.codigo" >{{categoria.nome}}</option>
         </select>
       </div>
     </div>
@@ -20,7 +25,7 @@
       <div class="form-group">
         <label class="control-label  info-required" for="emissao">Data</label>
         <div class="input-group">
-          <input class="form-control" rInputMask="99/99/9999" placeholder="dd/mm/yyyy" name="emissao" id="emissao" [(ngModel)]="transacao.emissao" ngbDatepicker [footerTemplate]="footerTemplate" #data="ngbDatepicker">
+          <input class="form-control" rInputMask="99/99/9999" placeholder="dd/mm/yyyy" name="emissao" id="emissao" [(ngModel)]="emissao" required ngbDatepicker [footerTemplate]="footerTemplate" #data="ngbDatepicker">
           <div class="input-group-append">
             <button class="btn  btn-outline-secondary  calendar" (click)="data.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
           </div>
@@ -33,11 +38,11 @@
       <label class="control-label  info-required">Tipo transação</label>
       <div class="form-group">
         <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="credito" name="tipoTransacao" class="custom-control-input" value="C" checked>
+          <input type="radio" id="credito" name="tipoTransacao" class="custom-control-input" [(ngModel)]="transacao.tipo" value="C">
           <label class="custom-control-label" for="credito">Crédito</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" id="debito" name="tipoTransacao" class="custom-control-input" value="D">
+          <input type="radio" id="debito" name="tipoTransacao" class="custom-control-input" [(ngModel)]="transacao.tipo" value="D">
           <label class="custom-control-label" for="debito">Débito</label>
         </div>
       </div>
@@ -46,8 +51,8 @@
     <div class="col-12  col-sm-4">
       <div class="form-group">
         <label class="control-label  info-required" for="conta">Conta</label>
-        <select class="form-control" name="conta" id="conta" [(ngModel)]="transacao.conta">
-          <option *ngFor="let conta of contas" [ngValue]="conta">{{conta.nome}}</option>
+        <select class="form-control" name="conta" id="conta" [(ngModel)]="transacao.conta.codigo" required>
+          <option *ngFor="let conta of contas" [ngValue]="conta.codigo">{{conta.nome}}</option>
         </select>
       </div>
     </div>
@@ -55,7 +60,7 @@
     <div class="col-12  col-sm-4">
       <div class="form-group">
         <label class="control-label  info-required" for="valor">Valor</label>
-        <input type="text" class="form-control" nome="valor" id="valor" [(ngModel)]="transacao.valor" currencyMask autocomplete="off">
+        <input type="text" class="form-control" name="valor" id="valor" currencyMask [(ngModel)]="transacao.valor" required>
       </div>
     </div>
   </div>
@@ -69,10 +74,19 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" name="conciliado" id="conciliado" [(ngModel)]="transacao.conciliado">
+        <label class="custom-control-label" for="conciliado">Conciliado</label>
+      </div>
+    </div>
+  </div>
+
   <div class="row  text-right">
     <div class="col-12">
       <a routerLink="/transacoes" class="btn  btn-outline-primary  mr-2">Voltar</a>
-      <input type="submit" class="btn  btn-primary" value="Salvar">
+      <input type="submit" class="btn  btn-primary" value="Salvar" [disabled]="f.invalid">
     </div>
   </div>
 </form>

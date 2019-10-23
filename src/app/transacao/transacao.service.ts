@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { TransacaoFiltro } from './model-filtro';
 
 import * as moment from 'moment';
+import { Transacao } from '../core/model';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,40 @@ export class TransacaoService {
                   });
   }
 
+  buscarPorCodigo(codigo: number): Promise<any> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.get(`${this.transacaoUrl}/${codigo}`, { headers }).toPromise()
+                .then(response => {
+                  return response; });
+  }
+
+  salvar(transacao: Transacao): Promise<Transacao> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                                     .append('Content-Type', 'application/json');
+
+    return this.http.post(this.transacaoUrl, transacao, { headers }).toPromise()
+                  .then(response => {
+                    return response as Transacao;
+                  });
+  }
+
+  atualizar(codigo: number, transacao: Transacao): Promise<Transacao> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                                     .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.transacaoUrl}/${codigo}`, transacao, { headers }).toPromise()
+                  .then(response => {
+                    return response as Transacao;
+                  });
+  }
+
+  excluir(codigo: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+
+    return this.http.delete(`${this.transacaoUrl}/${codigo}`, { headers }).toPromise().then(() => null);
+  }
+
   buscarTotaisPorMesAno(anoMes: number): Promise<any> {
     const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
 
@@ -78,5 +113,18 @@ export class TransacaoService {
                       return response;
                   });
 
+  }
+
+  buscarNoPeriodo(): Promise<any> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
+    let params = new HttpParams();
+
+    params = params.set('anoMesInicial', '201901');
+    params = params.set('anoMesFinal', '201912');
+
+    return this.http.get(`${this.transacaoUrl}/periodo`, { headers, params }).toPromise()
+                  .then(response => {
+                    return response;
+                  });
   }
 }

@@ -27,10 +27,16 @@ export class DashboardComponent implements OnInit {
     responsive: true,
   };
 
-  barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
+  barChartColors: Array<any> = [
+    {
+      backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
+      '#DD4477', '#3366CC', '#DC3912']
+    }
+  ];
 
   barChartData: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
@@ -47,7 +53,7 @@ export class DashboardComponent implements OnInit {
       backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
       '#DD4477', '#3366CC', '#DC3912']
     }
-]
+  ]
 
   constructor(private transacaoService: TransacaoService) {
     monkeyPatchChartJsTooltip();
@@ -59,6 +65,7 @@ export class DashboardComponent implements OnInit {
 
     this.carregarTotais(anoMes);
     this.buscarTransacoesPorCategoria(anoMes);
+    this.carregarTransacoesNoPeriodo();
   }
 
   carregarTotais(anoMes) {
@@ -77,6 +84,14 @@ export class DashboardComponent implements OnInit {
           this.pieChartLabels.push(transacao.categoria);
           this.pieChartData.push(Number(transacao.percentual.toPrecision(4.2)));
         });
+    });
+  }
+
+  carregarTransacoesNoPeriodo() {
+    this.transacaoService.buscarNoPeriodo().then(transacoes => {
+      transacoes.forEach(transacao => {
+        this.barChartLabels.push(transacao.label);
+      });
     });
   }
 
