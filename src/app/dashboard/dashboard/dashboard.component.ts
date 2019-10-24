@@ -19,22 +19,29 @@ export class DashboardComponent implements OnInit {
   faChartLine = faChartLine;
   faChartBar = faChartBar;
 
-  barChartOptions: ChartOptions = {
-    responsive: true,
-  };
-
-  pieChartOptions: ChartOptions = {
-    responsive: true,
-  };
-
   barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
+  barChartOptions: ChartOptions = {
+    responsive: true,
+  };
 
   barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    {
+      data: [],
+      label: 'Crédito',
+      backgroundColor: 'rgba(0,128,0,0.8)',
+      borderColor: 'rgba(0,128,0,1)',
+      hoverBackgroundColor: 'rgba(0,128,0,1)'
+    },
+    {
+      data: [],
+      label: 'Débito',
+      backgroundColor: 'rgba(139,0,0,0.8)',
+      borderColor: 'rgba(139,0,0,1)',
+      hoverBackgroundColor: 'rgba(139,0,0,1)'
+    }
   ];
 
   pieChartLabels: Label[] = [];
@@ -47,7 +54,11 @@ export class DashboardComponent implements OnInit {
       backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
       '#DD4477', '#3366CC', '#DC3912']
     }
-  ]
+  ];
+
+  pieChartOptions: ChartOptions = {
+    responsive: true,
+  };
 
   constructor(private transacaoService: TransacaoService) {
     monkeyPatchChartJsTooltip();
@@ -60,6 +71,18 @@ export class DashboardComponent implements OnInit {
     this.carregarTotais(anoMes);
     this.buscarTransacoesPorCategoria(anoMes);
     this.carregarTransacoesNoPeriodo();
+
+    this.carregarDados();
+  }
+
+  carregarDados() {
+    setInterval( () => {
+      const anoMes = moment(new Date()).format('YYYYMM');
+
+      this.carregarTotais(anoMes);
+      this.buscarTransacoesPorCategoria(anoMes);
+      this.carregarTransacoesNoPeriodo();
+    }, 7000);
   }
 
   carregarTotais(anoMes) {
@@ -72,6 +95,9 @@ export class DashboardComponent implements OnInit {
 
   buscarTransacoesPorCategoria(anoMes) {
     let transacoes: TransacaoCategoria[] = [];
+    this.pieChartLabels = [];
+    this.pieChartData = [];
+
     this.transacaoService.buscarPorCategoria(anoMes).then(resultado => {
         transacoes = resultado;
         transacoes.forEach(transacao => {
@@ -83,9 +109,40 @@ export class DashboardComponent implements OnInit {
 
   carregarTransacoesNoPeriodo() {
     this.transacaoService.buscarNoPeriodo().then(transacoes => {
+      let dataCredito = [];
+      let dataDebito = [];
+
+      this.barChartData[0].data = dataCredito;
+      this.barChartData[0].label = '';
+      this.barChartData[1].data = dataDebito;
+      this.barChartData[1].label = '';
+      this.barChartLabels = [];
+
       transacoes.forEach(transacao => {
-        this.barChartLabels.push(transacao.label);
+        if (this.barChartLabels.indexOf(transacao.label) < 0) {
+          this.barChartLabels.push(transacao.label);
+          dataCredito.push(0);
+          dataDebito.push(0);
+        }
       });
+
+      transacoes.forEach(transacao => {
+        if (transacao.tipoTransacao) {
+          const posicao = this.barChartLabels.indexOf(transacao.label);
+
+          if (transacao.tipoTransacao === 'C') {
+            dataCredito[posicao] = transacao.valor;
+          } else {
+            dataDebito[posicao] = transacao.valor;
+          }
+        }
+      });
+
+      this.barChartData[0].data = dataCredito;
+      this.barChartData[0].label = 'Crédito';
+
+      this.barChartData[1].data = dataDebito;
+      this.barChartData[1].label = 'Débito';
     });
   }
 
