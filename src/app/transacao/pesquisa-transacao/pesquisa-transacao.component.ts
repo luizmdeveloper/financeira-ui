@@ -103,4 +103,15 @@ export class PesquisaTransacaoComponent implements OnInit {
         this.showAlert(true, 'danger', this.erroHandlerService.handle(erro));
       });
   }
+
+  alterarConcialcao(transacao: any) {
+    this.transacaoService.conciliar(transacao.codigo, transacao.conciliado)
+        .then(() => {
+          this.showAlert(true, 'success', 'Transação conciliada com sucesso!');
+          this.loadPage();
+        })
+        .catch(erro => {
+          this.showAlert(false, 'danger', this.erroHandlerService.handle(erro));
+        });
+  }
 }

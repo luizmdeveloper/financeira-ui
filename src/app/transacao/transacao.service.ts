@@ -127,4 +127,12 @@ export class TransacaoService {
                     return response;
                   });
   }
+
+  conciliar(codigo: number, conciliado: boolean): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
+                                     .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.transacaoUrl}/${codigo}/conciliado`, !conciliado, {headers}).toPromise().then(() => null);
+  }
+
 }
