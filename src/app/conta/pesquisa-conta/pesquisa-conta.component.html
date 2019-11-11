@@ -30,7 +30,7 @@
           <td>{{ conta.nome }}</td>
           <td class="col-acoes">
             <a [routerLink]="['/contas', conta.codigo]" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [swal]="deleteSwal" (confirm)="excluir(conta)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [disabled]="!auth.temPermissao('ROLE_EXCLUIR_CONTA')" [swal]="deleteSwal" (confirm)="excluir(conta)"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>

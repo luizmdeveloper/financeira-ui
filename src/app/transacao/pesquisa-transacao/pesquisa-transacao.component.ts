@@ -8,6 +8,7 @@ import { CategoriaService } from '../../categoria/categoria.service';
 import { ContaService } from '../../conta/conta.service';
 import { TransacaoService } from '../transacao.service';
 import { ErroHandlerService } from '../../core/erro-handler.service';
+import { AuthService } from './../../seguranca/auth.service';
 import { Alert } from '../../core/model';
 
 @Component({
@@ -35,7 +36,8 @@ export class PesquisaTransacaoComponent implements OnInit {
   constructor(private categoriaService: CategoriaService,
               private erroHandlerService: ErroHandlerService,
               private contaService: ContaService,
-              private transacaoService: TransacaoService) { }
+              private transacaoService: TransacaoService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.carregarTodasCategorias();

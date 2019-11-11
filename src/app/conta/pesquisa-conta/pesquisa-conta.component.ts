@@ -5,6 +5,7 @@ import { Alert } from 'src/app/core/model';
 import { Contafiltro } from './../modelo.filtro';
 import { ErroHandlerService } from './../../core/erro-handler.service';
 import { ContaService } from './../conta.service';
+import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisa-conta',
@@ -23,7 +24,8 @@ export class PesquisaContaComponent implements OnInit {
   faPlus = faPlus;
 
   constructor(private contaService: ContaService,
-              private erroHandlerService: ErroHandlerService) { }
+              private erroHandlerService: ErroHandlerService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.alert = new Alert();

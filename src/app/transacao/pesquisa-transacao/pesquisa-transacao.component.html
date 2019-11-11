@@ -89,7 +89,7 @@
           <td><a href="javascript:;" (click)="alterarConcialcao(transacao)" placement="top" [ngbTooltip]="transacao.conciliado ? 'Desconciliar': 'Conciliar'">{{ transacao.conciliado ? 'Conciliado' : 'Desconciliado' }}</a></td>
           <td class="col-acoes">
             <a [routerLink]="['/transacoes', transacao.codigo]" class="btn  btn-primary  mr-2" placement="top" ngbTooltip="Editar"><fa-icon [icon]="faPen"></fa-icon></a>
-            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [swal]="deleteSwal" (confirm)="excluir(transacao)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button class="btn  btn-primary" placement="top" ngbTooltip="Excluir" [disabled]="!auth.temPermissao('ROLE_EXCLUIR_TRANSACAO')" [swal]="deleteSwal" (confirm)="excluir(transacao)"><fa-icon [icon]="faTrash"></fa-icon></button>
           </td>
         </tr>
       </tbody>

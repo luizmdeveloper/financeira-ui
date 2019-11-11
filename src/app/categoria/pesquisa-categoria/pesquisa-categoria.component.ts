@@ -5,6 +5,7 @@ import { faTrash, faPen, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { CategoriaService } from './../categoria.service';
 import { ErroHandlerService } from './../../core/erro-handler.service';
 import { CategoriaFiltro } from '../modelo-filtro';
+import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pesquisa-categoria',
@@ -23,7 +24,8 @@ export class PesquisaCategoriaComponent implements OnInit {
   faPlus = faPlus;
 
   constructor(private categoriaService: CategoriaService,
-              private erroHandlerService: ErroHandlerService) { }
+              private erroHandlerService: ErroHandlerService,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.alert = new Alert();
