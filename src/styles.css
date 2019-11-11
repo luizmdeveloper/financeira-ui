@@ -13,3 +13,23 @@
 .tabel{
   height: 30px;
 }
+
+.error-panel {
+  color: #777777;
+  text-align: center;
+}
+
+.error-panel__title {
+  font-size: 32px;
+}
+
+.error-panel__description {
+  display: block;
+  padding: 18px 0;
+}
+
+.error-panel__code {
+  color: #d9d9d9;
+  font-size: 80px;
+  font-weight: normal;
+}
