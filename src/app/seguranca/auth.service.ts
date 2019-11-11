@@ -53,5 +53,28 @@ export class AuthService {
               });
   }
 
+  public obterNovoAccessToken(): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization','Basic YW5ndWxhcjpAbmd1bEByMA==')
+                                     .append('Content-Type','application/x-www-form-urlencoded');
+
+    const body = `grant_type=refresh_token`;
+
+    return this.http.post(this.oauth2Url, body, { headers, withCredentials: true }).toPromise()
+            .then(response => {
+                const token = response['access_token'];
+                this.armazenarToken(token);
+
+                return Promise.resolve(null);
+              })
+            .catch(erro => {
+              return Promise.resolve(null);
+            });
+  }
+
+  public isAccessTokenInvalido() {
+    const token = localStorage.getItem('token_ir');
+
+    return !token || this.jwtHelper.isTokenExpired(token);
+  }
 
 }
