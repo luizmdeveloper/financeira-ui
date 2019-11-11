@@ -13,13 +13,13 @@
     <li class="navbar__menu-item" routerLinkActive="ativo">
       <a routerLink="/dashboard" (click)="exibindoMenu = !exibindoMenu">Dashboard</a>
     </li>
-    <li class="navbar__menu-item" routerLinkActive="ativo">
+    <li class="navbar__menu-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CATEGORIA')">
       <a routerLink="/categorias" (click)="exibindoMenu = !exibindoMenu">Categorias</a>
     </li>
-    <li class="navbar__menu-item" routerLinkActive="ativo">
+    <li class="navbar__menu-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONTA')">
       <a routerLink="/contas" (click)="exibindoMenu = !exibindoMenu">Contas</a>
     </li>
-    <li class="navbar__menu-item" routerLinkActive="ativo">
+    <li class="navbar__menu-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_TRANSACAO')">
       <a routerLink="/transacoes" (click)="exibindoMenu = !exibindoMenu">Transações</a>
     </li>
     <li class="navbar__menu-item" routerLinkActive="ativo">

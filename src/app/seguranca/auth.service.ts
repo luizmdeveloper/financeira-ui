@@ -77,4 +77,8 @@ export class AuthService {
     return !token || this.jwtHelper.isTokenExpired(token);
   }
 
+  public temPermissao(permissao: string) {
+    return this.jwtPayLoad && this.jwtPayLoad.authorities.includes(permissao);
+  }
+
 }
