@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { LogoutService } from './../../seguranca/logout.service';
 import { Component, OnInit } from '@angular/core';
 
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -13,9 +15,16 @@ export class NavBarComponent implements OnInit {
   exibindoMenu: boolean;
   faBars = faBars;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router,
+              private logoutService: LogoutService) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  logout() {
+    this.logoutService.remover().then(() => {
+      this.router.navigate(['/login']);
+    })
   }
 
 }

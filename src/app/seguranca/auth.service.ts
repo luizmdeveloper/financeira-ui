@@ -81,4 +81,9 @@ export class AuthService {
     return this.jwtPayLoad && this.jwtPayLoad.authorities.includes(permissao);
   }
 
+  public removerToken() {
+    localStorage.removeItem('token_ir');
+    this.jwtPayLoad = null;
+  }
+
 }
