@@ -1,7 +1,9 @@
+import { FinanceiroHttp } from './../seguranca/financeiro-http';
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { TransacaoFiltro } from './model-filtro';
+import { environment } from './../../environments/environment';
 
 import * as moment from 'moment';
 import { Transacao } from '../core/model';
@@ -11,12 +13,13 @@ import { Transacao } from '../core/model';
 })
 export class TransacaoService {
 
-  transacaoUrl = 'http://localhost:8080/transacoes'
+  private transacaoUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: FinanceiroHttp) {
+    this.transacaoUrl = `${environment.baseUrl}/transacoes`;
+  }
 
   filtrar(filtro: TransacaoFiltro): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('resumo', '');
@@ -43,7 +46,7 @@ export class TransacaoService {
       params = params.set('emissaoAte', moment(filtro.dataAte).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(this.transacaoUrl, { headers, params }).toPromise()
+    return this.http.get(this.transacaoUrl, { params }).toPromise()
                   .then(response => {
                     const resposta = response;
                     const content = resposta['content'];
@@ -58,43 +61,31 @@ export class TransacaoService {
   }
 
   buscarPorCodigo(codigo: number): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.transacaoUrl}/${codigo}`, { headers }).toPromise()
+    return this.http.get(`${this.transacaoUrl}/${codigo}`).toPromise()
                 .then(response => {
                   return response; });
   }
 
   salvar(transacao: Transacao): Promise<Transacao> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                                     .append('Content-Type', 'application/json');
-
-    return this.http.post(this.transacaoUrl, transacao, { headers }).toPromise()
+    return this.http.post(this.transacaoUrl, transacao).toPromise()
                   .then(response => {
                     return response as Transacao;
                   });
   }
 
   atualizar(codigo: number, transacao: Transacao): Promise<Transacao> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                                     .append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.transacaoUrl}/${codigo}`, transacao, { headers }).toPromise()
+    return this.http.put(`${this.transacaoUrl}/${codigo}`, transacao).toPromise()
                   .then(response => {
                     return response as Transacao;
                   });
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.delete(`${this.transacaoUrl}/${codigo}`, { headers }).toPromise().then(() => null);
+    return this.http.delete(`${this.transacaoUrl}/${codigo}`).toPromise().then(() => null);
   }
 
   buscarTotaisPorMesAno(anoMes: number): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.transacaoUrl}/noMesAno/${anoMes}`, { headers }).toPromise()
+    return this.http.get(`${this.transacaoUrl}/noMesAno/${anoMes}`).toPromise()
                   .then(response => {
                       const resultado = {
                         totalCarteira: response['totalCarteira'],
@@ -107,8 +98,7 @@ export class TransacaoService {
   }
 
   buscarPorCategoria(anoMes: number): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-    return this.http.get(`${this.transacaoUrl}/porCategoria/${anoMes}`, { headers }).toPromise()
+    return this.http.get(`${this.transacaoUrl}/porCategoria/${anoMes}`).toPromise()
                   .then(response => {
                       return response;
                   });
@@ -116,23 +106,19 @@ export class TransacaoService {
   }
 
   buscarNoPeriodo(): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
     let params = new HttpParams();
 
     params = params.set('anoMesInicial', '201901');
     params = params.set('anoMesFinal', '201912');
 
-    return this.http.get(`${this.transacaoUrl}/periodo`, { headers, params }).toPromise()
+    return this.http.get(`${this.transacaoUrl}/periodo`, { params }).toPromise()
                   .then(response => {
                     return response;
                   });
   }
 
   conciliar(codigo: number, conciliado: boolean): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                                     .append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.transacaoUrl}/${codigo}/conciliado`, !conciliado, {headers}).toPromise().then(() => null);
+    return this.http.put(`${this.transacaoUrl}/${codigo}/conciliado`, !conciliado).toPromise().then(() => null);
   }
 
 }
