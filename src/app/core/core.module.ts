@@ -1,3 +1,4 @@
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { NgModule } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -43,7 +44,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
 
 @NgModule({
   declarations: [
-    NavBarComponent
+    NavBarComponent,
+    PaginaNaoEncontradaComponent
   ],
   imports: [
     CommonModule,
