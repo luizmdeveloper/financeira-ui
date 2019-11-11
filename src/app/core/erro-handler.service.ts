@@ -18,6 +18,10 @@ export class ErroHandlerService {
               && erroResposta.status >= 400 && erroResposta.status <= 499){
         mensagem = 'Ocorreu um erro ao processar a sua solicitação';
 
+        if (erroResposta.status === 403) {
+          mensagem = 'Usuário não tem autorização para fazer tal operação';
+        }
+
         try {
           mensagem = erroResposta.error[0].mensagemUsuario;
         } catch (e) { }
