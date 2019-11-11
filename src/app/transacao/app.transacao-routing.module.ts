@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './../seguranca/auth.guard';
 import { PesquisaTransacaoComponent } from './pesquisa-transacao/pesquisa-transacao.component';
@@ -9,21 +9,21 @@ const routes: Routes = [
   {
     path: 'transacoes',
     component: PesquisaTransacaoComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_PESQUISAR_TRANSACAO'}
   },
   {
     path: 'transacoes/novo',
     component: CadastroTransacaoComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_SALVAR_TRANSACAO'}
   },
   {
     path: 'transacoes/:codigo',
     component: CadastroTransacaoComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_SALVAR_TRANSACAO'}
-  },
+  }
 ];
 
 @NgModule({
@@ -34,4 +34,4 @@ const routes: Routes = [
     RouterModule
   ]
 })
-export class TransacaoRoutingModule {
+export class TransacaoRoutingModule { }

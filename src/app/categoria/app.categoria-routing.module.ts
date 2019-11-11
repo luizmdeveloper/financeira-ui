@@ -9,19 +9,19 @@ const routes: Routes = [
   {
     path: 'categorias',
     component: PesquisaCategoriaComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_PESQUISAR_CATEGORIA'}
   },
   {
     path: 'categorias/nova',
     component: CadastroCategoriaComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_SALVAR_CATEGORIA'}
   },
   {
     path: 'categorias/:codigo',
     component: CadastroCategoriaComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {role: 'ROLE_SALVAR_CATEGORIA'}
   },
 ];

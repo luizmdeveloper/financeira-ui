@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './../seguranca/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    CanActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: { role: 'ROLE_PESQUISAR_TRANSACAO' }
   }
 ];
