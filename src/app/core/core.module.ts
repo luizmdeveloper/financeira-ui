@@ -28,7 +28,7 @@ import { TransacaoService } from './../transacao/transacao.service';
 import { CategoriaService } from './../categoria/categoria.service';
 import { ContaService } from './../conta/conta.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { OauthService } from '../seguranca/oauth.service';
+import { AuthService } from '../seguranca/auth.service';
 import { ErroHandlerService } from './erro-handler.service';
 
 registerLocaleData(localePt);
@@ -76,7 +76,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: LOCALE_ID, useValue: 'pt' },
     HttpClient,
     JwtHelperService,
-    OauthService,
+    AuthService,
     ErroHandlerService,
     ContaService,
     CategoriaService,

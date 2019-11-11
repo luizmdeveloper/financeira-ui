@@ -1,13 +1,16 @@
 <div class="wrapper fadeInDown">
   <div id="formContent">
+    <div *ngIf="alert.mostrar">
+      <ngb-alert [type]="alert.type" (close)="closeAlert()">{{ alert.mensagem }} </ngb-alert>
+    </div>
     <div class="fadeIn  first">
       <img src="../../../assets/images/logo-info.png" class="image__login-header" id="icon" alt="logo inforio sistemas" />
     </div>
 
     <form #f="ngForm" autocomplete="off">
-      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" ngModel #email required>
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" NgModel #senha required>
-      <input type="submit" class="fadeIn fourth" value="login" [disabled]="!f.valid" (click)="login(email, senha)">
+      <input type="text" id="email" class="fadeIn second" name="email" placeholder="examplo@exemplo.com" ngModel #email required>
+      <input type="password" id="senha" class="fadeIn third" name="senha" placeholder="senha" NgModel #senha required>
+      <input type="submit" class="fadeIn fourth" value="login" [disabled]="!f.valid" (click)="login(email.value, senha.value); senha.value = ''">
     </form>
 
   </div>
