@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../../environments/environment';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -13,7 +14,16 @@ export class OauthService {
 
   constructor(private http: HttpClient,
               private jwtHelper: JwtHelperService) {
-    this.oauth2Url = `${this.oauth2Url}/oauth/token`;
+    this.carregarToken();
+    this.oauth2Url = `${environment.baseUrl}/oauth/token`;
+  }
+
+  private carregarToken() {
+    const token = localStorage.getItem('token_ir');
+
+    if (token) {
+      this.armazenarToken(token);
+    }
   }
 
   private armazenarToken(token: string) {
@@ -42,4 +52,6 @@ export class OauthService {
                 return Promise.reject(httpResponseErro);
               });
   }
+
+
 }
