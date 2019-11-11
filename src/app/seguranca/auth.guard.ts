@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-
     if (this.auth.isAccessTokenInvalido()){
       return this.auth.obterNovoAccessToken().then(() => {
         if (this.auth.isAccessTokenInvalido()) {
@@ -31,7 +30,6 @@ export class AuthGuard implements CanActivate {
       this.router.navigate(['/nao-autorizado']);
       return false;
     }
-
 
     return true;
   }
