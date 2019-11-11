@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import {  HttpParams } from '@angular/common/http';
 
 import { Conta } from './../core/model';
 import { Contafiltro } from './modelo.filtro';
+import { FinanceiroHttp } from './../seguranca/financeiro-http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContaService {
 
-  contaUrl = 'http://localhost:8080/contas';
+  private contaUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: FinanceiroHttp) { }
 
   filtrar(filtro: Contafiltro) {
     let params = new HttpParams();
-    const headers =  new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
 
     params = params.set('page', filtro.paginaAtual.toString());
     params = params.set('size', filtro.quantidadeRegistroPorPagina.toString());
@@ -24,7 +24,7 @@ export class ContaService {
       params = params.set('nome', filtro.nome);
     }
 
-    return this.http.get(this.contaUrl, { headers, params }).toPromise()
+    return this.http.get(this.contaUrl, { params }).toPromise()
                 .then(response => {
                     const contas = response['content'];
                     const totalElementos = response['totalElements'];
@@ -40,10 +40,7 @@ export class ContaService {
   }
 
   buscarPorCodigo(codigo: number): Promise<any> {
-    const headers = new HttpHeaders()
-                        .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.contaUrl}/${codigo}`, {headers}).toPromise()
+    return this.http.get(`${this.contaUrl}/${codigo}`).toPromise()
                 .then(resultado => {
                     const conta = resultado;
 
@@ -52,10 +49,7 @@ export class ContaService {
   }
 
   buscarTodos(): Promise<any> {
-    const headers = new HttpHeaders()
-                        .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.get(`${this.contaUrl}`, {headers}).toPromise()
+    return this.http.get(`${this.contaUrl}`).toPromise()
                 .then(resultado => {
                     const conta = resultado['content'];
                     return conta;
@@ -63,11 +57,7 @@ export class ContaService {
   }
 
   atualizar(codigo: number, conta: Conta): Promise<any> {
-    const headers = new HttpHeaders()
-                        .append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                        .append('Content-Type', 'application/json');
-
-    return this.http.put(`${this.contaUrl}/${codigo}`, conta, {headers}).toPromise()
+    return this.http.put(`${this.contaUrl}/${codigo}`, conta).toPromise()
                 .then(resposta => {
                   const conta = resposta;
 
@@ -76,10 +66,7 @@ export class ContaService {
   }
 
   salvar(conta: Conta): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu')
-                                     .append('Content-Type', 'application/json');
-
-    return this.http.post(this.contaUrl, conta, {headers}).toPromise()
+    return this.http.post(this.contaUrl, conta).toPromise()
                 .then(resposta => {
                   const conta = resposta;
 
@@ -88,9 +75,7 @@ export class ContaService {
   }
 
   excluir(codigo: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic bHVpem1hcmlvQGluZm9yaW8uY29tLmJyOmFkbWlu');
-
-    return this.http.delete(`${this.contaUrl}/${codigo}`, { headers }).toPromise()
+    return this.http.delete(`${this.contaUrl}/${codigo}`).toPromise()
                  .then(() => null);
   }
 
