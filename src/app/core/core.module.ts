@@ -18,6 +18,7 @@ import { NgbDatePTParserFormatter } from '../NgbDatePTParserFormatter';
 import { CustomDatepickerI18n, I18n } from '../CustomDatepickerI18n';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask/src/currency-mask.config';
+import { FinanceiroHttp } from './../seguranca/financeiro-http';
 
 import { CategoriaModule } from '../categoria/categoria.module';
 import { TransacaoModule } from '../transacao/transacao.module';
@@ -74,8 +75,10 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     [{provide: NgbDateParserFormatter, useClass: NgbDatePTParserFormatter}],
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: LOCALE_ID, useValue: 'pt' },
+
     HttpClient,
     JwtHelperService,
+    FinanceiroHttp,
     AuthService,
     ErroHandlerService,
     ContaService,
