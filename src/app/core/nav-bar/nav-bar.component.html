@@ -9,7 +9,7 @@
   </div>
 
   <ul class="navbar__menu" [hidden]="!exibindoMenu">
-    <li class="navbar__menu-usuario">Luiz Mário</li>
+    <li class="navbar__menu-usuario">{{auth.jwtPayLoad?.nome}}</li>
     <li class="navbar__menu-item" routerLinkActive="ativo">
       <a routerLink="/dashboard" (click)="exibindoMenu = !exibindoMenu">Dashboard</a>
     </li>

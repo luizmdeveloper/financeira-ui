@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from './../../seguranca/auth.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +13,7 @@ export class NavBarComponent implements OnInit {
   exibindoMenu: boolean;
   faBars = faBars;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }
