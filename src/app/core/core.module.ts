@@ -1,3 +1,4 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { NgModule } from '@angular/core';
 import { LOCALE_ID } from '@angular/core';
@@ -74,6 +75,7 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig },
     { provide: LOCALE_ID, useValue: 'pt' },
     HttpClient,
+    JwtHelperService,
     OauthService,
     ErroHandlerService,
     ContaService,
